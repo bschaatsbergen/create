@@ -26,7 +26,7 @@ var (
 		Example: "create bar.txt " +
 			"\n" + "create foo/bar.txt" +
 			"\n" + "create foo/bar.txt -c 'this is a test string'" +
-			"\n" + "create foo/bar.txt -m 0744",
+			"\n" + "create foo/bar.txt -m 0777",
 		Run: func(cmd *cobra.Command, args []string) {
 			if len(args) != 1 {
 				fmt.Println("error: provide a single argument")
