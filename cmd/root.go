@@ -24,10 +24,15 @@ var (
 		Short:   "create - A modern UNIX file generation tool",
 		Version: version,
 		PreRun:  toggleDebug,
-		Example: "create bar.txt " +
-			"\n" + "create foo/bar.txt" +
-			"\n" + "create foo/bar.txt -c 'this is a test string'" +
-			"\n" + "create foo/bar.txt -m 0777",
+		Example: "create bar.txt " + "\n" +
+			"\n" + "# Create a file in a new path" +
+			"\n" + "create foo/bar.txt" + "\n" +
+			"\n" + "# Write content to file" +
+			"\n" + "create foo/bar.txt -c 'this is a test string'" + "\n" +
+			"\n" + "# Set file permissions" +
+			"\n" + "create foo/bar.txt -m 0777" + "\n" +
+			"\n" + "# Force overwrite" +
+			"\n" + "create foo/bar.txt --force",
 		Run: func(cmd *cobra.Command, args []string) {
 			if len(args) != 1 {
 				fmt.Println("error: provide a single argument")
@@ -48,6 +53,7 @@ func init() {
 	rootCmd.Flags().BoolVarP(&flagStore.Debug, "debug", "d", false, "verbose logging")
 	rootCmd.Flags().StringVarP(&flagStore.Content, "content", "c", "", "file content")
 	rootCmd.Flags().Int32VarP(&flagStore.Mode, "mode", "m", 0644, "file mode")
+	rootCmd.Flags().BoolVar(&flagStore.Force, "force", false, "force overwrite")
 }
 
 func setupCobraUsageTemplate() {
