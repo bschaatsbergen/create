@@ -12,22 +12,17 @@ import (
 
 // CreateFile is the entry point to create a file with the given name and options
 func CreateFile(fileName string, flagStore model.Flagstore) {
-	// Check for file existence and confirmation
 	if !confirmOverwrite(fileName, flagStore.Force) {
 		return
 	}
 
-	// Create necessary directories
 	createDirectories(fileName)
 
-	// Create or overwrite the file
-	f := createOrUpdateFile(fileName, flagStore)
-	defer closeFile(f) // Close the file when this function is done
+	f := createFile(fileName)
+	defer closeFile(f)
 
-	// Set file mode
 	setFileMode(f, os.FileMode(flagStore.Mode))
 
-	// Write content to the file
 	writeContentToFile(f, flagStore.Content)
 }
 
@@ -49,7 +44,6 @@ func confirmOverwrite(fileName string, forceOverwrite bool) bool {
 	return true
 }
 
-// createDirectories creates necessary directories for the file
 func createDirectories(fileName string) {
 	if err := os.MkdirAll(filepath.Dir(fileName), 0770); err != nil {
 		logrus.Panic(err)
@@ -61,8 +55,7 @@ func createDirectories(fileName string) {
 	}
 }
 
-// createOrUpdateFile creates a new file or overwrites an existing file
-func createOrUpdateFile(fileName string, flagStore model.Flagstore) *os.File {
+func createFile(fileName string) *os.File {
 	f, err := os.Create(fileName)
 	if err != nil {
 		logrus.Panic(err)
@@ -71,7 +64,6 @@ func createOrUpdateFile(fileName string, flagStore model.Flagstore) *os.File {
 	return f
 }
 
-// setFileMode sets the mode of the file
 func setFileMode(f *os.File, mode os.FileMode) {
 	if err := f.Chmod(mode); err != nil {
 		logrus.Panic(err)
@@ -79,7 +71,6 @@ func setFileMode(f *os.File, mode os.FileMode) {
 	logrus.Debug("Changed file mode to: ", mode)
 }
 
-// witeContentToFile writes content to the file
 func writeContentToFile(f *os.File, content string) {
 	if content != "" {
 		f.Write([]byte(fmt.Sprintf("%s\n", content)))
@@ -87,7 +78,6 @@ func writeContentToFile(f *os.File, content string) {
 	}
 }
 
-// closeFile closes the file
 func closeFile(f *os.File) {
 	defer f.Close()
 }
