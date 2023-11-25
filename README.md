@@ -29,6 +29,22 @@ To create a file, simply run the below command.
 $ create foo.txt
 ```
 
+### Create a file with content
+
+To create a file with content, you use the `-c` flag:
+
+```
+$ create foo.txt -c "example string"
+```
+
+### Create a file and set permissions
+
+To create a file and set permissions, use the `-m` flag:
+
+```
+$ create foo.txt -m 0777
+```
+
 ## Contributing
 
 Contributions are highly appreciated and always welcome.
