@@ -37,6 +37,14 @@ To create a file with content, you use the `-c` flag:
 $ create foo.txt -c "example"
 ```
 
+### Create a file in a non-existing directory
+
+You simply add the path to the file you want to create:
+
+```
+$ create foo/bar.txt
+```
+
 ### Create a file and set permissions
 
 To create a file and set permissions, use the `-m` flag:
