@@ -8,6 +8,7 @@ import (
 	"github.com/bschaatsbergen/create/pkg/core"
 	"github.com/bschaatsbergen/create/pkg/model"
 	"github.com/fatih/color"
+	"github.com/sirupsen/logrus"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
@@ -33,7 +34,9 @@ var (
 				fmt.Println("See 'create -h' for help and examples")
 				os.Exit(1)
 			}
+			logrus.Debugf("Flagstore: %+v", flagStore)
 			fileName := args[0]
+			logrus.Debugf("Parsed argument at index 0: %s", fileName)
 			core.CreateFile(fileName, flagStore)
 		},
 	}
