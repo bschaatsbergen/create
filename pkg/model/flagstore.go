@@ -1,5 +1,7 @@
 package model
 
 type Flagstore struct {
-	Debug bool
+	Debug   bool
+	Content string
+	Mode    int32
 }

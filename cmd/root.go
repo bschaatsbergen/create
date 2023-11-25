@@ -24,7 +24,9 @@ var (
 		Version: version,
 		PreRun:  toggleDebug,
 		Example: "create bar.txt " +
-			"\n" + "create foo/bar.txt",
+			"\n" + "create foo/bar.txt" +
+			"\n" + "create foo/bar.txt -c 'this is a test string'" +
+			"\n" + "create foo/bar.txt -m 0744",
 		Run: func(cmd *cobra.Command, args []string) {
 			if len(args) != 1 {
 				fmt.Println("error: provide a single argument")
@@ -41,6 +43,8 @@ func init() {
 	setupCobraUsageTemplate()
 	rootCmd.CompletionOptions.DisableDefaultCmd = true
 	rootCmd.Flags().BoolVarP(&flagStore.Debug, "debug", "d", false, "verbose logging")
+	rootCmd.Flags().StringVarP(&flagStore.Content, "content", "c", "", "file content")
+	rootCmd.Flags().Int32VarP(&flagStore.Mode, "mode", "m", 0644, "file mode")
 }
 
 func setupCobraUsageTemplate() {

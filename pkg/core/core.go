@@ -1,6 +1,7 @@
 package core
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -16,6 +17,12 @@ func CreateFile(fileName string, flagStore model.Flagstore) {
 	f, err := os.Create(fileName)
 	if err != nil {
 		logrus.Panic(err)
+	}
+	if err := f.Chmod(os.FileMode(flagStore.Mode)); err != nil {
+		logrus.Panic(err)
+	}
+	if flagStore.Content != "" {
+		f.Write([]byte(fmt.Sprintf("%s\n", flagStore.Content)))
 	}
 	defer f.Close()
 	logrus.Debugf("Created file: %s", f.Name())
