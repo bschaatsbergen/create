@@ -21,7 +21,7 @@ You can download the [latest binary](https://github.com/bschaatsbergen/create/re
 
 - Create files
 - Create files with content
-- Create files in non-existing directories
+- Creates the directories if it doesn't exist
 - Create files with permissions
 - File overwrite protection
 
@@ -45,7 +45,7 @@ To create a file with content, you use the `-c` flag:
 $ create foo.txt -c "example"
 ```
 
-### Create a file in a non-existing directory
+### Create directories if they don't exist
 
 You simply add the path to the file you want to create:
 
