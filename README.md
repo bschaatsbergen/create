@@ -34,7 +34,7 @@ $ create foo.txt
 To create a file with content, you use the `-c` flag:
 
 ```
-$ create foo.txt -c "example string"
+$ create foo.txt -c "example"
 ```
 
 ### Create a file and set permissions
