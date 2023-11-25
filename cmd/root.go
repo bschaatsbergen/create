@@ -34,9 +34,9 @@ var (
 				fmt.Println("See 'create -h' for help and examples")
 				os.Exit(1)
 			}
-			logrus.Debugf("Flagstore: %+v", flagStore)
 			fileName := args[0]
-			logrus.Debugf("Parsed argument at index 0: %s", fileName)
+			logrus.Debugf("Argument: %s", fileName)
+			logrus.Debugf("Flags passed: %+v", flagStore)
 			core.CreateFile(fileName, flagStore)
 		},
 	}
@@ -75,8 +75,10 @@ func (f *PlainFormatter) Format(entry *log.Entry) ([]byte, error) {
 func toggleDebug(cmd *cobra.Command, args []string) {
 	if flagStore.Debug {
 		log.SetLevel(log.DebugLevel)
-		log.Debug("Debug logs enabled")
-		log.SetFormatter(&log.TextFormatter{})
+		log.SetFormatter(&log.TextFormatter{
+			DisableTimestamp: true,
+		})
+		log.Debug("Debug logs: enabled")
 	} else {
 		plainFormatter := new(PlainFormatter)
 		log.SetFormatter(plainFormatter)
