@@ -17,6 +17,14 @@ brew install create
 
 You can download the [latest binary](https://github.com/bschaatsbergen/create/releases/latest) for Linux, MacOS, and Windows.
 
+## Features
+
+- Create files
+- Create files with content
+- Create files in non-existing directories
+- Create files with permissions
+- File overwrite protection
+
 ## Examples
 
 Using `create` is very simple.
