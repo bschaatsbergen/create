@@ -13,7 +13,7 @@ import (
 // CreateFile is the entry point to create a file with the given name and options
 func CreateFile(fileName string, flagStore model.Flagstore) {
 	// Check for file existence and confirmation
-	if !confirmOverwrite(fileName) {
+	if !confirmOverwrite(fileName, flagStore.Force) {
 		return
 	}
 
@@ -32,16 +32,18 @@ func CreateFile(fileName string, flagStore model.Flagstore) {
 }
 
 // confirmOverwrite prompts the user for confirmation before overwriting an existing file
-func confirmOverwrite(fileName string) bool {
-	if _, err := os.Stat(fileName); err == nil {
-		fmt.Printf("File '%s' already exists. Do you want to overwrite it? (yes/no): ", fileName)
-		scanner := bufio.NewScanner(os.Stdin)
-		scanner.Scan()
-		answer := scanner.Text()
+func confirmOverwrite(fileName string, forceOverwrite bool) bool {
+	if !forceOverwrite {
+		if _, err := os.Stat(fileName); err == nil {
+			fmt.Printf("File '%s' already exists. Do you want to overwrite it? (yes/no): ", fileName)
+			scanner := bufio.NewScanner(os.Stdin)
+			scanner.Scan()
+			answer := scanner.Text()
 
-		if answer != "yes" {
-			logrus.Warn("File creation aborted.")
-			return false
+			if answer != "yes" {
+				logrus.Warn("File creation aborted.")
+				return false
+			}
 		}
 	}
 	return true
