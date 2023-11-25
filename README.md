@@ -53,6 +53,14 @@ To create a file and set permissions, use the `-m` flag:
 $ create foo.txt -m 0777
 ```
 
+### Overwrite a file
+
+To overwrite a file (`create` has file overwrite protection by default), use the `-f` flag:
+
+```
+$ create foo.txt -f
+```
+
 ## Contributing
 
 Contributions are highly appreciated and always welcome.
