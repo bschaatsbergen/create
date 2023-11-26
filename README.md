@@ -63,10 +63,10 @@ $ create foo.txt -m 0777
 
 ### Overwrite a file
 
-To overwrite a file (`create` has file overwrite protection by default), use the `-f` flag:
+To overwrite a file (`create` has file overwrite protection by default), use the `--force` flag:
 
 ```
-$ create foo.txt -f
+$ create foo.txt --force
 ```
 
 ## Contributing
